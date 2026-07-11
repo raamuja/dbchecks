@@ -1,0 +1,67 @@
+UAT ASE 
+
+MAIN UAT 
+
+Database DB Size  DB Size				Log Size   Log Size
+	(Alloted) (Used)				(Alloted)  (Used)
+ADF	1000	  800					2000	   1000
+CAR	2500	  2250					1000	   500	
+CRP	3800	  2000					1500	   1400
+LIS	4900	  4600					1750	   1700
+PTF	1500	  750					1000	   450
+
+
+BACK UAT 
+
+Database DB Size  DB Size				Log Size   Log Size
+	(Alloted) (Used)				(Alloted)  (Used)
+ADF	1000	  500	   				2000	   1000
+CAR	2500	  2250					1000	   900
+CRP	3800	  3700					1500	   450
+LIS	4900	  3800					1750	   250
+PTF	1500	  1000					1000	   450
+
+VAULT UAT 
+
+Database DB Size  DB Size				Log Size   Log Size
+	(Alloted) (Used)				(Alloted)  (Used)
+CLD	1000	  950					2000	   1000
+MQ	2500	  2450					1000	   900
+
+
+UAT REPLICATION
+
+PB1_REP1_UAT_SQL
+
+DSI		Queue		Agent_Status
+Connection_1	104567
+Rep_agent_1			Down
+	
+PB1_REP2_UAT_SQL
+
+DSI		Queue		Agent_Status
+Connection_2	5600
+Rep_agent_2			Up
+
+PB1_REP3_UAT_SQL
+
+DSI		Queue		Agent_Status
+Connection_3	7823
+Rep_agent_2			Down
+
+PB1_REP4_UAT_SQL
+
+DSI		Queue		Agent_Status
+Connection_4	178000
+Rep_agent_4			Down
+
+PB1_REP5_UAT_SQL
+
+DSI		Queue		Agent_Status
+Connection_5	4999
+Rep_agent_5			Down
+
+PB1_REP6_UAT_SQL
+
+DSI		Queue		Agent_Status
+Rep_agent_6			Up
