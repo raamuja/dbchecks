@@ -50,10 +50,11 @@
     margin-bottom:6px;
   }
   .page-title-box{
-    display:grid;
-    grid-template-columns:1fr auto 1fr;
+    display:flex;
+    flex-wrap:wrap;
     align-items:center;
-    gap:18px;
+    justify-content:space-between;
+    gap:6px 18px;
     width:100%;
     padding:5px 20px;
     border:1px solid var(--panel-border);
@@ -72,25 +73,47 @@
     flex-wrap:nowrap;
   }
   .theme-toggle{
-    justify-self:start;
+    order:3;
+    flex:0 0 auto;
+    margin-right:22px;
   }
   .generated-badge{
-    justify-self:end;
+    order:1;
+    flex:0 0 auto;
   }
   .theme-toggle{
     display:flex;
+    align-items:center;
     gap:4px;
     flex-shrink:0;
   }
+  .theme-toggle .theme-pointer{
+    font-size:56px;
+    line-height:1;
+    display:inline-block;
+    transform:translateY(-6px);
+    color:#1f2937;
+    margin-right:2px;
+    animation:pointer-blink 0.6s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .theme-toggle .theme-pointer{ animation:none; text-shadow:0 0 3px rgba(31,41,55,0.7); }
+  }
   .theme-btn{
     font-family:"Inter",sans-serif;
-    font-size:12px;
+    font-size:15px;
     font-weight:700;
     border:1px solid var(--panel-border);
     border-radius:6px;
-    padding:5px 9px;
+    width:30px;
+    height:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     cursor:pointer;
     white-space:nowrap;
+    line-height:1;
+    padding:0;
   }
   #themeLightBtn{
     color:#1f2937;
@@ -158,16 +181,18 @@
   tr.row-hidden{ display:none !important; }
   .card-hidden{ display:none !important; }
   .page-title-box h1{
-    flex:1 1 auto;
-    margin:0;
+    order:2;
+    flex:1 1 260px;
+    min-width:0;
+    margin:0 0 0 -30px;
     text-align:center;
     font-family:var(--mono);
     font-weight:700;
     letter-spacing:0.02em;
     text-transform:uppercase;
     color:var(--accent);
-    font-size:clamp(15px, 1.9vw, 24px);
-    white-space:nowrap;
+    font-size:clamp(13px, 1.9vw, 24px);
+    white-space:normal;
   }
   .legend{
     display:flex;
@@ -941,6 +966,7 @@
   }
   .at-a-glance .aag-count.critical{ color:var(--critical); }
   .at-a-glance .aag-count.warning{ color:var(--warning); }
+  .at-a-glance .aag-count.healthy{ color:var(--healthy); }
   .at-a-glance .aag-sep{ color:var(--text-faint); font-weight:400; }
 
   /* ---- Status icon glyphs (colorblind-safe, alongside color) ---- */
@@ -1096,6 +1122,7 @@
   body.theme-dark .rep-status-col.critical,
   body.theme-dark .iq-status-col.critical{ color:#3a0a0a; }
   body.theme-dark .filter-pointer{ color:#e5e9f0; }
+  body.theme-dark .theme-pointer{ color:#e5e9f0; }
   body.theme-dark .at-a-glance.has-issues{ background:#1a2332; border-color:#324056; }
   body.theme-dark .at-a-glance.all-healthy{ background:rgba(74,222,128,0.12); }
   @media print{
@@ -1151,12 +1178,13 @@
 
 <header class="top-bar">
   <div class="page-title-box">
-    <div class="theme-toggle" role="group" aria-label="Theme">
-      <button type="button" id="themeLightBtn" class="theme-btn active" onclick="setTheme('light')">&#9728;&#65039; Light Theme</button>
-      <button type="button" id="themeDarkBtn" class="theme-btn" onclick="setTheme('dark')">&#127769; Dark Theme</button>
-    </div>
-    <h1>NEOLINK - ASE, Replication and IQ Server Health Checks Dashboard</h1>
     <span id="refreshed" class="generated-badge"></span>
+    <h1>NEOLINK - ASE, Replication and IQ Server Health Checks Dashboard</h1>
+    <div class="theme-toggle" role="group" aria-label="Theme">
+      <span class="theme-pointer">&#9758;</span>
+      <button type="button" id="themeLightBtn" class="theme-btn active" title="Light Theme" aria-label="Light Theme" onclick="setTheme('light')">&#9728;&#65039;</button>
+      <button type="button" id="themeDarkBtn" class="theme-btn" title="Dark Theme" aria-label="Dark Theme" onclick="setTheme('dark')">&#127769;</button>
+    </div>
   </div>
 </header>
 
@@ -1177,10 +1205,6 @@
     </span>
   </div>
   <div id="at-a-glance" class="at-a-glance"></div>
-</div>
-
-<div class="status-count-wrap">
-  <div id="status-count-summary"></div>
 </div>
 
 <div id="section-ase" class="wide-header-wrap">
@@ -1218,8 +1242,8 @@
 <div id="iq-summary" class="iq-grid"></div>
 
 <script>
-const SOURCE_FILE = "/mnt/user-data/uploads/DB_size.txt";
-const GENERATED_AT = "2026-07-20 07:22:29 CEST";
+const SOURCE_FILE = "/home/claude/db_size_real.txt";
+const GENERATED_AT = "2026-07-20 17:40:32 CEST";
 const servers = [{"name": "PBL1_DATA_UAT_SQL", "rows": [{"name": "ADF", "dbAlloc": 1000, "dbUsed": 800, "logAlloc": 2000, "logUsed": 1000}, {"name": "CAR", "dbAlloc": 2500, "dbUsed": 2250, "logAlloc": 1000, "logUsed": 500}, {"name": "CRP", "dbAlloc": 3800, "dbUsed": 2000, "logAlloc": 1500, "logUsed": 1400}, {"name": "LIS", "dbAlloc": 4900, "dbUsed": 4600, "logAlloc": 1750, "logUsed": 1700}, {"name": "PTF", "dbAlloc": 1500, "dbUsed": 750, "logAlloc": 1000, "logUsed": 450}]}, {"name": "PBL1_BACK_UAT_SQL", "rows": [{"name": "ADF", "dbAlloc": 1000, "dbUsed": 500, "logAlloc": 2000, "logUsed": 1000}, {"name": "CAR", "dbAlloc": 2500, "dbUsed": 2250, "logAlloc": 1000, "logUsed": 900}, {"name": "CRP", "dbAlloc": 3800, "dbUsed": 3700, "logAlloc": 1500, "logUsed": 450}, {"name": "LIS", "dbAlloc": 4900, "dbUsed": 3800, "logAlloc": 1750, "logUsed": 250}, {"name": "PTF", "dbAlloc": 1500, "dbUsed": 1000, "logAlloc": 1000, "logUsed": 450}]}, {"name": "PBL1_VAUL_UAT_SQL", "rows": [{"name": "CLD", "dbAlloc": 1000, "dbUsed": 950, "logAlloc": 2000, "logUsed": 1000}, {"name": "MQ", "dbAlloc": 2500, "dbUsed": 2450, "logAlloc": 1000, "logUsed": 900}]}];
 const replication = [{"name": "PB1_REP1_UAT_SQL", "rows": [{"dsi": "Connection_1", "queue": 104567, "agentStatus": null}, {"dsi": "Rep_agent_1", "queue": null, "agentStatus": "Down"}]}, {"name": "PB1_REP2_UAT_SQL", "rows": [{"dsi": "Connection_2", "queue": 5600, "agentStatus": null}, {"dsi": "Rep_agent_2", "queue": null, "agentStatus": "Up"}]}, {"name": "PB1_REP3_UAT_SQL", "rows": [{"dsi": "Connection_3", "queue": 7823, "agentStatus": null}, {"dsi": "Rep_agent_2", "queue": null, "agentStatus": "Down"}]}, {"name": "PB1_REP4_UAT_SQL", "rows": [{"dsi": "Connection_4", "queue": 178000, "agentStatus": null}, {"dsi": "Rep_agent_4", "queue": null, "agentStatus": "Down"}]}, {"name": "PB1_REP5_UAT_SQL", "rows": [{"dsi": "Connection_5", "queue": 4999, "agentStatus": null}, {"dsi": "Rep_agent_5", "queue": null, "agentStatus": "Down"}]}, {"name": "PB1_REP6_UAT_SQL", "rows": [{"dsi": "Rep_agent_6", "queue": null, "agentStatus": "Up"}]}];
 const iq = [{"name": "PB1_IQ_WRITER", "rows": [{"process": "Space", "usage": 98, "transactions": null}, {"process": "Long Running", "usage": null, "transactions": "No"}]}, {"name": "PB1_IQ_READER", "rows": [{"process": "Space", "usage": 65, "transactions": null}, {"process": "Long Running", "usage": null, "transactions": "Yes"}]}];
@@ -1505,24 +1529,22 @@ function tallyCounts(items, statusFn){
   items.forEach(item => { counts[statusFn(item)]++; });
   return counts;
 }
-function renderAtAGlance(totalCritical, totalWarning){
+function renderAtAGlance(totalCritical, totalWarning, totalHealthy){
   const el = document.getElementById("at-a-glance");
   if (!el) return;
   if (totalCritical === 0 && totalWarning === 0){
     el.className = "at-a-glance all-healthy";
-    el.innerHTML = `<span class="aag-count">${statusIcon("healthy")} All Systems Healthy</span>`;
+    el.innerHTML = `<span class="aag-count healthy">${statusIcon("healthy")} All Systems Healthy (${totalHealthy})</span>`;
     return;
   }
   el.className = "at-a-glance has-issues";
   const parts = [];
   if (totalCritical > 0) parts.push(`<span class="aag-count critical">${statusIcon("critical")} ${totalCritical} Critical</span>`);
   if (totalWarning > 0) parts.push(`<span class="aag-count warning">${statusIcon("warning")} ${totalWarning} Warning</span>`);
+  if (totalHealthy > 0) parts.push(`<span class="aag-count healthy">${statusIcon("healthy")} ${totalHealthy} Healthy</span>`);
   el.innerHTML = parts.join('<span class="aag-sep">&middot;</span>');
 }
 function renderCountTable(){
-  const container = document.getElementById("status-count-summary");
-  if (!container) return;
-
   const aseDatabases = [];
   servers.forEach(s => (s.rows || []).forEach(r => aseDatabases.push(computeRow(r))));
   const aseCounts = tallyCounts(aseDatabases, dbOverallStatus);
@@ -1537,39 +1559,8 @@ function renderCountTable(){
 
   const totalCritical = aseCounts.critical + repCounts.critical + iqCounts.critical;
   const totalWarning = aseCounts.warning + repCounts.warning + iqCounts.warning;
-  renderAtAGlance(totalCritical, totalWarning);
-
-  const categories = [
-    {name: "ASE", cls: "ase", counts: aseCounts},
-    {name: "Replication", cls: "rep", counts: repCounts},
-    {name: "IQ", cls: "iq", counts: iqCounts},
-  ];
-
-  const statusOrder = ["critical", "warning", "healthy"];
-
-  const cardsHtml = categories.map(cat => `
-    <div class="status-count-card">
-      <table class="status-count-table">
-        <thead>
-          <tr>
-            <th class="count-head-category cat-${cat.cls}" colspan="2">${cat.name}</th>
-          </tr>
-          <tr>
-            <th class="count-sub-head cat-${cat.cls}">Status</th>
-            <th class="count-sub-head cat-${cat.cls}">Count</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${statusOrder.map(st => `
-          <tr>
-            <td class="count-status-cell ${st}">${statusLabel(st)}</td>
-            <td class="count-value-cell ${st}">${cat.counts[st]}</td>
-          </tr>`).join("")}
-        </tbody>
-      </table>
-    </div>`).join("");
-
-  container.innerHTML = cardsHtml;
+  const totalHealthy = aseCounts.healthy + repCounts.healthy + iqCounts.healthy;
+  renderAtAGlance(totalCritical, totalWarning, totalHealthy);
 }
 renderCountTable();
 
