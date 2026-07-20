@@ -257,18 +257,24 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     font-family:"Inter",sans-serif;
     font-size:12px;
     font-weight:700;
-    color:var(--text-dim);
-    background:#f2f5f8;
     border:1px solid var(--panel-border);
     border-radius:6px;
     padding:5px 9px;
     cursor:pointer;
     white-space:nowrap;
   }
+  #themeLightBtn{
+    color:#1f2937;
+    background:#ffffff;
+  }
+  #themeDarkBtn{
+    color:#e5e9f0;
+    background:#1a2332;
+    border-color:#324056;
+  }
   .theme-btn.active{
-    color:#ffffff;
-    background:var(--accent);
-    border-color:var(--accent);
+    outline:2px solid var(--accent);
+    outline-offset:1px;
   }
   .dash-filter{
     display:flex;
@@ -1179,7 +1185,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     background:linear-gradient(180deg, #1a2332, #141b28);
     box-shadow:0 4px 14px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
   }
-  body.theme-dark .theme-btn{ background:#1a2332; color:var(--text-dim); }
   body.theme-dark .dash-filter select{ background:#1a2332; color:var(--accent); }
   body.theme-dark .summary-card{
     background:linear-gradient(180deg, rgba(45,212,191,0.10), rgba(20,27,40,0.55));

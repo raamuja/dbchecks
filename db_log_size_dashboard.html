@@ -86,18 +86,24 @@
     font-family:"Inter",sans-serif;
     font-size:12px;
     font-weight:700;
-    color:var(--text-dim);
-    background:#f2f5f8;
     border:1px solid var(--panel-border);
     border-radius:6px;
     padding:5px 9px;
     cursor:pointer;
     white-space:nowrap;
   }
+  #themeLightBtn{
+    color:#1f2937;
+    background:#ffffff;
+  }
+  #themeDarkBtn{
+    color:#e5e9f0;
+    background:#1a2332;
+    border-color:#324056;
+  }
   .theme-btn.active{
-    color:#ffffff;
-    background:var(--accent);
-    border-color:var(--accent);
+    outline:2px solid var(--accent);
+    outline-offset:1px;
   }
   .dash-filter{
     display:flex;
@@ -1008,7 +1014,6 @@
     background:linear-gradient(180deg, #1a2332, #141b28);
     box-shadow:0 4px 14px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
   }
-  body.theme-dark .theme-btn{ background:#1a2332; color:var(--text-dim); }
   body.theme-dark .dash-filter select{ background:#1a2332; color:var(--accent); }
   body.theme-dark .summary-card{
     background:linear-gradient(180deg, rgba(45,212,191,0.10), rgba(20,27,40,0.55));
@@ -1214,7 +1219,7 @@
 
 <script>
 const SOURCE_FILE = "/mnt/user-data/uploads/DB_size.txt";
-const GENERATED_AT = "2026-07-20 06:57:49 CEST";
+const GENERATED_AT = "2026-07-20 07:22:29 CEST";
 const servers = [{"name": "PBL1_DATA_UAT_SQL", "rows": [{"name": "ADF", "dbAlloc": 1000, "dbUsed": 800, "logAlloc": 2000, "logUsed": 1000}, {"name": "CAR", "dbAlloc": 2500, "dbUsed": 2250, "logAlloc": 1000, "logUsed": 500}, {"name": "CRP", "dbAlloc": 3800, "dbUsed": 2000, "logAlloc": 1500, "logUsed": 1400}, {"name": "LIS", "dbAlloc": 4900, "dbUsed": 4600, "logAlloc": 1750, "logUsed": 1700}, {"name": "PTF", "dbAlloc": 1500, "dbUsed": 750, "logAlloc": 1000, "logUsed": 450}]}, {"name": "PBL1_BACK_UAT_SQL", "rows": [{"name": "ADF", "dbAlloc": 1000, "dbUsed": 500, "logAlloc": 2000, "logUsed": 1000}, {"name": "CAR", "dbAlloc": 2500, "dbUsed": 2250, "logAlloc": 1000, "logUsed": 900}, {"name": "CRP", "dbAlloc": 3800, "dbUsed": 3700, "logAlloc": 1500, "logUsed": 450}, {"name": "LIS", "dbAlloc": 4900, "dbUsed": 3800, "logAlloc": 1750, "logUsed": 250}, {"name": "PTF", "dbAlloc": 1500, "dbUsed": 1000, "logAlloc": 1000, "logUsed": 450}]}, {"name": "PBL1_VAUL_UAT_SQL", "rows": [{"name": "CLD", "dbAlloc": 1000, "dbUsed": 950, "logAlloc": 2000, "logUsed": 1000}, {"name": "MQ", "dbAlloc": 2500, "dbUsed": 2450, "logAlloc": 1000, "logUsed": 900}]}];
 const replication = [{"name": "PB1_REP1_UAT_SQL", "rows": [{"dsi": "Connection_1", "queue": 104567, "agentStatus": null}, {"dsi": "Rep_agent_1", "queue": null, "agentStatus": "Down"}]}, {"name": "PB1_REP2_UAT_SQL", "rows": [{"dsi": "Connection_2", "queue": 5600, "agentStatus": null}, {"dsi": "Rep_agent_2", "queue": null, "agentStatus": "Up"}]}, {"name": "PB1_REP3_UAT_SQL", "rows": [{"dsi": "Connection_3", "queue": 7823, "agentStatus": null}, {"dsi": "Rep_agent_2", "queue": null, "agentStatus": "Down"}]}, {"name": "PB1_REP4_UAT_SQL", "rows": [{"dsi": "Connection_4", "queue": 178000, "agentStatus": null}, {"dsi": "Rep_agent_4", "queue": null, "agentStatus": "Down"}]}, {"name": "PB1_REP5_UAT_SQL", "rows": [{"dsi": "Connection_5", "queue": 4999, "agentStatus": null}, {"dsi": "Rep_agent_5", "queue": null, "agentStatus": "Down"}]}, {"name": "PB1_REP6_UAT_SQL", "rows": [{"dsi": "Rep_agent_6", "queue": null, "agentStatus": "Up"}]}];
 const iq = [{"name": "PB1_IQ_WRITER", "rows": [{"process": "Space", "usage": 98, "transactions": null}, {"process": "Long Running", "usage": null, "transactions": "No"}]}, {"name": "PB1_IQ_READER", "rows": [{"process": "Space", "usage": 65, "transactions": null}, {"process": "Long Running", "usage": null, "transactions": "Yes"}]}];
