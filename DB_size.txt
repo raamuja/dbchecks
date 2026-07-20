@@ -1,6 +1,6 @@
 UAT ASE 
 
-MAIN UAT 
+PBL1_DATA_UAT_SQL 
 
 Database DB Size  DB Size				Log Size   Log Size
 	(Alloted) (Used)				(Alloted)  (Used)
@@ -11,7 +11,7 @@ LIS	4900	  4600					1750	   1700
 PTF	1500	  750					1000	   450
 
 
-BACK UAT 
+PBL1_BACK_UAT_SQL 
 
 Database DB Size  DB Size				Log Size   Log Size
 	(Alloted) (Used)				(Alloted)  (Used)
@@ -21,13 +21,12 @@ CRP	3800	  3700					1500	   450
 LIS	4900	  3800					1750	   250
 PTF	1500	  1000					1000	   450
 
-VAULT UAT 
+PBL1_VAUL_UAT_SQL 
 
 Database DB Size  DB Size				Log Size   Log Size
 	(Alloted) (Used)				(Alloted)  (Used)
 CLD	1000	  950					2000	   1000
 MQ	2500	  2450					1000	   900
-
 
 UAT REPLICATION
 
@@ -65,3 +64,18 @@ PB1_REP6_UAT_SQL
 
 DSI		Queue		Agent_Status
 Rep_agent_6			Up
+
+UAT IQ
+
+PB1_IQ_WRITER
+
+Process		Usage		Transactions
+Space		98	
+Long Running			No
+
+
+PB1_IQ_READER
+
+Process		Usage		Transactions
+Space		65	
+Long Running			Yes
