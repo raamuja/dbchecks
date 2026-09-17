@@ -88,16 +88,16 @@
     flex-shrink:0;
   }
   .theme-toggle .theme-pointer{
-    font-size:56px;
+    display:inline-flex;
+    align-items:center;
     line-height:1;
-    display:inline-block;
-    transform:translateY(-6px);
-    color:#1f2937;
+    font-size:30px;
+    transform:translateY(-1px);
     margin-right:2px;
     animation:pointer-blink 0.6s ease-in-out infinite;
   }
   @media (prefers-reduced-motion: reduce){
-    .theme-toggle .theme-pointer{ animation:none; text-shadow:0 0 3px rgba(31,41,55,0.7); }
+    .theme-toggle .theme-pointer{ animation:none; }
   }
   .theme-btn{
     font-family:"Inter",sans-serif;
@@ -136,19 +136,19 @@
     white-space:nowrap;
   }
   .dash-filter .filter-pointer{
-    font-size:56px;
+    display:inline-flex;
+    align-items:center;
     line-height:1;
-    display:inline-block;
-    transform:translateY(-6px);
-    color:#1f2937;
+    font-size:30px;
+    transform:translateY(-2px);
     animation:pointer-blink 0.6s ease-in-out infinite;
   }
   @keyframes pointer-blink{
-    0%, 100% { opacity:1; text-shadow:0 0 3px rgba(31,41,55,0.9), 0 0 8px rgba(31,41,55,0.5); }
-    50% { opacity:0.4; text-shadow:0 0 1px rgba(31,41,55,0.3); }
+    0%, 100% { opacity:1; }
+    50% { opacity:0.4; }
   }
   @media (prefers-reduced-motion: reduce){
-    .dash-filter .filter-pointer{ animation:none; text-shadow:0 0 3px rgba(31,41,55,0.7); }
+    .dash-filter .filter-pointer{ animation:none; }
   }
   .select-glow-wrap{
     display:inline-block;
@@ -241,17 +241,30 @@
     color:var(--accent);
     white-space:nowrap;
   }
+  .section-title-box h2.ase-summary-title,
+  .section-title-box h2.rep-summary-title,
+  .section-title-box h2.iq-summary-title{
+    text-align:center;
+    font-size:clamp(17px, 1.9vw, 23px);
+    font-weight:800;
+    letter-spacing:0.02em;
+  }
   .section-title-box h2.ase-summary-title{
     color:#0f766e;
-    text-align:center;
+    text-shadow:0 1px 0 rgba(255,255,255,0.7), 0 2px 4px rgba(15,118,110,0.22);
   }
   .section-title-box h2.rep-summary-title{
-    color:#92400e;
-    text-align:center;
+    color:#b45309;
+    text-shadow:0 1px 0 rgba(255,255,255,0.7), 0 2px 4px rgba(180,83,9,0.22);
   }
   .section-title-box h2.iq-summary-title{
     color:#6d28d9;
-    text-align:center;
+    text-shadow:0 1px 0 rgba(255,255,255,0.7), 0 2px 4px rgba(109,40,217,0.22);
+  }
+  body.theme-dark .section-title-box h2.ase-summary-title,
+  body.theme-dark .section-title-box h2.rep-summary-title,
+  body.theme-dark .section-title-box h2.iq-summary-title{
+    text-shadow:0 1px 0 rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.4);
   }
   .wide-header-wrap{
     margin-top:12px;
@@ -272,7 +285,7 @@
     box-shadow:0 3px 10px rgba(15,23,42,0.06);
   }
   .wide-header-box h2{
-    text-align:left;
+    text-align:center;
     flex:1 1 auto;
     margin:0;
     white-space:nowrap;
@@ -434,6 +447,120 @@
     color:#2b6b62;
     text-align:center;
   }
+  .summary-dbname.dbname-critical .dbname-text{
+    display:inline-block;
+    color:#ffffff;
+    font-weight:800;
+    background:#3d0000;
+    border-radius:4px;
+    padding:1px 7px;
+    animation:pointer-blink 0.6s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .summary-dbname.dbname-critical .dbname-text{ animation:none; }
+  }
+  .top-tables-btn{
+    display:block;
+    margin:4px auto 0;
+    max-width:98%;
+    font-size:10.5px;
+    font-weight:800;
+    font-family:"Inter",sans-serif;
+    color:#3d0000;
+    background:#fff5f5;
+    border:1px solid #b34d4d;
+    border-radius:5px;
+    padding:2px 7px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .top-tables-btn:hover{ background:#ffecec; }
+  .top-tables-btn.active{ background:#ffdede; }
+  body.theme-dark .top-tables-btn{
+    background:#3a1414;
+    color:#ff3d3d;
+    border-color:#c24545;
+    text-shadow:0 0 8px rgba(255,70,70,0.85);
+  }
+  body.theme-dark .top-tables-btn:hover{ background:#4a1a1a; }
+  body.theme-dark .top-tables-btn.active{ background:#521c1c; }
+  .top-tables-btn .top-tables-label{
+    display:inline-block;
+    animation:pointer-blink 0.6s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .top-tables-btn .top-tables-label{ animation:none; }
+  }
+
+  /* Floating popover (a single shared element positioned via JS, so it can
+     never be clipped by a card's overflow:hidden and never truncates). */
+  .top-tables-popover{
+    position:fixed;
+    z-index:9999;
+    display:none;
+    min-width:260px;
+    max-height:320px;
+    overflow-y:auto;
+    background:#ffffff;
+    border:1px solid #c7ccd4;
+    border-radius:8px;
+    box-shadow:0 8px 24px rgba(20,25,35,0.22);
+    font-family:var(--mono);
+    font-size:12px;
+  }
+  .top-tables-popover.open{ display:block; }
+  .top-tables-popover .ttp-header{
+    display:grid;
+    grid-template-columns:200px auto;
+    gap:14px;
+    padding:8px 0;
+    font-weight:800;
+    font-size:12px;
+    color:#111827;
+    background:#eef1f6;
+    position:sticky;
+    top:0;
+  }
+  .top-tables-popover .ttp-divider{
+    height:2px;
+    background:#8b95a5;
+  }
+  .top-tables-popover .ttp-row{
+    display:grid;
+    grid-template-columns:200px auto;
+    gap:14px;
+    padding:6px 0;
+    color:#1f2937;
+    font-weight:600;
+    border-bottom:1px solid #e3e7ed;
+  }
+  .top-tables-popover .ttp-row:last-child{ border-bottom:none; }
+  .top-tables-popover .ttp-row:hover{ background:#f3f5f8; }
+  .top-tables-popover .ttp-name{
+    overflow-wrap:anywhere;
+    padding:0 12px 0 12px;
+    border-right:2px solid #8b95a5;
+  }
+  .top-tables-popover .ttp-count{ white-space:nowrap; color:#111827; padding:0 12px 0 0; }
+  body.theme-dark .top-tables-popover{
+    background:#1a2332;
+    border-color:#3a4a63;
+    box-shadow:0 8px 24px rgba(0,0,0,0.5);
+  }
+  body.theme-dark .top-tables-popover .ttp-header{
+    background:#0f1522;
+    color:#f5f7fa;
+  }
+  body.theme-dark .top-tables-popover .ttp-divider{
+    background:#7d8aa0;
+  }
+  body.theme-dark .top-tables-popover .ttp-row{
+    color:#e5e9f0;
+    border-bottom-color:#2c3a51;
+  }
+  body.theme-dark .top-tables-popover .ttp-row:hover{ background:#22304a; }
+  body.theme-dark .top-tables-popover .ttp-count{ color:#f5f7fa; }
+  body.theme-dark .top-tables-popover .ttp-name{ border-right-color:#7d8aa0; }
   .summary-slno{
     text-align:center;
     color:var(--text-dim);
@@ -447,6 +574,17 @@
   .summary-pctcell.healthy{ color:var(--healthy-muted); }
   .summary-pctcell.warning{ color:var(--warning); }
   .summary-pctcell.critical{ color:var(--critical); }
+  .trend-badge{
+    display:inline-block;
+    margin-left:5px;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:0.01em;
+    white-space:nowrap;
+    vertical-align:1px;
+  }
+  .trend-badge.trend-up{ color:#b45309; }
+  .trend-badge.trend-down{ color:#15803d; }
 
   /* Solid dark-orange / dark-red fill with white text -- applied ONLY to the
      STATUS column badges (e.g. "✗ Critical" / "⚠ Warning"), never to the
@@ -1089,6 +1227,13 @@
     background:rgba(255,255,255,0.04);
   }
   body.theme-dark .summary-dbname{ color:#5eead4; }
+  body.theme-dark .summary-dbname.dbname-critical .dbname-text{
+    color:#ffffff;
+    background:#ff3d3d;
+    box-shadow:0 0 10px rgba(255,61,61,0.75);
+  }
+  body.theme-dark .trend-badge.trend-up{ color:#fbbf24; }
+  body.theme-dark .trend-badge.trend-down{ color:#4ade80; }
   body.theme-dark .rep-dsi{ color:#fdba74; }
   body.theme-dark .iq-process{ color:#c4b5fd; }
   body.theme-dark .server-tag{ color:#ffffff; }
@@ -1181,16 +1326,16 @@
     <span id="refreshed" class="generated-badge"></span>
     <h1>NEOLINK - ASE, Replication and IQ Server Health Checks Dashboard</h1>
     <div class="theme-toggle" role="group" aria-label="Theme">
-      <span class="theme-pointer">&#9758;</span>
-      <button type="button" id="themeLightBtn" class="theme-btn active" title="Light Theme" aria-label="Light Theme" onclick="setTheme('light')">&#9728;&#65039;</button>
-      <button type="button" id="themeDarkBtn" class="theme-btn" title="Dark Theme" aria-label="Dark Theme" onclick="setTheme('dark')">&#127769;</button>
+      <span class="theme-pointer">👉</span>
+      <button type="button" id="themeLightBtn" class="theme-btn active" title="Light Theme" aria-label="Light Theme" onclick="setTheme('light')"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M4.55 4.55l1.85 1.85M17.6 17.6l1.85 1.85M2.5 12h2.6M18.9 12h2.6M4.55 19.45l1.85-1.85M17.6 6.4l1.85-1.85"/></svg></button>
+      <button type="button" id="themeDarkBtn" class="theme-btn" title="Dark Theme" aria-label="Dark Theme" onclick="setTheme('dark')"><svg viewBox="0 0 24 24" width="16" height="16" fill="#facc15" stroke="none"><path d="M20.6 15.1A8.9 8.9 0 1 1 9.4 3.4a7 7 0 0 0 11.2 11.7z"/></svg></button>
     </div>
   </div>
 </header>
 
 <div class="at-a-glance-row">
   <div class="dash-filter">
-    <span class="filter-pointer">&#9758;</span>
+    <span class="filter-pointer">👉</span>
     <span class="select-glow-wrap">
     <select id="dashFilter" onchange="applyFilter(this.value)" aria-label="Filter dashboard">
       <option value="all" style="background:#f1f5f9; color:#1f2937;">All</option>
@@ -1209,7 +1354,7 @@
 
 <div id="section-ase" class="wide-header-wrap">
   <div class="section-title-box wide-header-box ase-header-box">
-    <h2 class="ase-summary-title">ASE - Status Critical &amp; Warning Databases by Server</h2>
+    <h2 class="ase-summary-title">ASE - Database Status by Server</h2>
     <div class="legend">
       <span class="legend-healthy"><i class="dot healthy"></i>Healthy &lt; 80%</span>
       <span class="legend-warning"><i class="dot warning"></i>Warning 80&ndash;90%</span>
@@ -1221,7 +1366,7 @@
 
 <div id="section-replication" class="wide-header-wrap">
   <div class="section-title-box wide-header-box rep-header-box">
-    <h2 class="rep-summary-title">Replication - Status Critical &amp; Warning</h2>
+    <h2 class="rep-summary-title">Replication Status by Server</h2>
     <div class="rep-condition-legend">
       <span class="legend-warning"><i class="dot warning"></i>Warning: Queue 3,000&ndash;50,000</span>
       <span class="legend-critical"><i class="dot critical"></i>Critical: Queue &gt;50,000 or Agent Down</span>
@@ -1232,7 +1377,7 @@
 
 <div id="section-iq" class="wide-header-wrap">
   <div class="section-title-box wide-header-box iq-header-box">
-    <h2 class="iq-summary-title">IQ - Status Critical &amp; Warning</h2>
+    <h2 class="iq-summary-title">IQ Status by Server</h2>
     <div class="iq-condition-legend">
       <span class="legend-warning"><i class="dot warning"></i>Warning: Usage 76&ndash;94% or Long Running present</span>
       <span class="legend-critical"><i class="dot critical"></i>Critical: Usage 95&ndash;100%</span>
@@ -1242,9 +1387,9 @@
 <div id="iq-summary" class="iq-grid"></div>
 
 <script>
-const SOURCE_FILE = "/home/claude/db_size_real.txt";
-const GENERATED_AT = "2026-07-20 17:40:32 CEST";
-const servers = [{"name": "PBL1_DATA_UAT_SQL", "rows": [{"name": "ADF", "dbAlloc": 1000, "dbUsed": 800, "logAlloc": 2000, "logUsed": 1000}, {"name": "CAR", "dbAlloc": 2500, "dbUsed": 2250, "logAlloc": 1000, "logUsed": 500}, {"name": "CRP", "dbAlloc": 3800, "dbUsed": 2000, "logAlloc": 1500, "logUsed": 1400}, {"name": "LIS", "dbAlloc": 4900, "dbUsed": 4600, "logAlloc": 1750, "logUsed": 1700}, {"name": "PTF", "dbAlloc": 1500, "dbUsed": 750, "logAlloc": 1000, "logUsed": 450}]}, {"name": "PBL1_BACK_UAT_SQL", "rows": [{"name": "ADF", "dbAlloc": 1000, "dbUsed": 500, "logAlloc": 2000, "logUsed": 1000}, {"name": "CAR", "dbAlloc": 2500, "dbUsed": 2250, "logAlloc": 1000, "logUsed": 900}, {"name": "CRP", "dbAlloc": 3800, "dbUsed": 3700, "logAlloc": 1500, "logUsed": 450}, {"name": "LIS", "dbAlloc": 4900, "dbUsed": 3800, "logAlloc": 1750, "logUsed": 250}, {"name": "PTF", "dbAlloc": 1500, "dbUsed": 1000, "logAlloc": 1000, "logUsed": 450}]}, {"name": "PBL1_VAUL_UAT_SQL", "rows": [{"name": "CLD", "dbAlloc": 1000, "dbUsed": 950, "logAlloc": 2000, "logUsed": 1000}, {"name": "MQ", "dbAlloc": 2500, "dbUsed": 2450, "logAlloc": 1000, "logUsed": 900}]}];
+const SOURCE_FILE = "/home/claude/db_dashboard/db_size.txt";
+const GENERATED_AT = "2026-09-12 15:54:52 CEST";
+const servers = [{"name": "PBL1_DATA_UAT_SQL", "rows": [{"name": "ADF", "dbAlloc": 1000, "dbUsed": 800, "logAlloc": 2000, "logUsed": 1000, "deltaData": 0.0, "deltaLog": 0.0}, {"name": "CAR", "dbAlloc": 2500, "dbUsed": 2250, "logAlloc": 1000, "logUsed": 500, "deltaData": -1.4, "deltaLog": 0.6}, {"name": "CRP", "dbAlloc": 3800, "dbUsed": 2000, "logAlloc": 1500, "logUsed": 1400, "deltaData": 1.7, "deltaLog": -2.1}, {"name": "LIS", "dbAlloc": 4900, "dbUsed": 4600, "logAlloc": 1750, "logUsed": 1700, "deltaData": 2.3, "deltaLog": -0.8}, {"name": "PTF", "dbAlloc": 1500, "dbUsed": 750, "logAlloc": 1000, "logUsed": 450, "deltaData": 3.2, "deltaLog": 1.1}]}, {"name": "PBL1_BACK_UAT_SQL", "rows": [{"name": "ADF", "dbAlloc": 1000, "dbUsed": 500, "logAlloc": 2000, "logUsed": 1000, "deltaData": 0.0, "deltaLog": 0.0}, {"name": "CAR", "dbAlloc": 2500, "dbUsed": 2250, "logAlloc": 1000, "logUsed": 900, "deltaData": -1.4, "deltaLog": 0.6}, {"name": "CRP", "dbAlloc": 3800, "dbUsed": 3700, "logAlloc": 1500, "logUsed": 450, "deltaData": 1.7, "deltaLog": -2.1}, {"name": "LIS", "dbAlloc": 4900, "dbUsed": 3800, "logAlloc": 1750, "logUsed": 250, "deltaData": 2.3, "deltaLog": -0.8}, {"name": "PTF", "dbAlloc": 1500, "dbUsed": 1000, "logAlloc": 1000, "logUsed": 450, "deltaData": 3.2, "deltaLog": 1.1}]}, {"name": "PBL1_VAUL_UAT_SQL", "rows": [{"name": "CLD", "dbAlloc": 1000, "dbUsed": 950, "logAlloc": 2000, "logUsed": 1000, "deltaData": -0.5, "deltaLog": 2.4}, {"name": "MQ", "dbAlloc": 2500, "dbUsed": 2450, "logAlloc": 1000, "logUsed": 900, "deltaData": 1.9, "deltaLog": -0.3}]}];
 const replication = [{"name": "PB1_REP1_UAT_SQL", "rows": [{"dsi": "Connection_1", "queue": 104567, "agentStatus": null}, {"dsi": "Rep_agent_1", "queue": null, "agentStatus": "Down"}]}, {"name": "PB1_REP2_UAT_SQL", "rows": [{"dsi": "Connection_2", "queue": 5600, "agentStatus": null}, {"dsi": "Rep_agent_2", "queue": null, "agentStatus": "Up"}]}, {"name": "PB1_REP3_UAT_SQL", "rows": [{"dsi": "Connection_3", "queue": 7823, "agentStatus": null}, {"dsi": "Rep_agent_2", "queue": null, "agentStatus": "Down"}]}, {"name": "PB1_REP4_UAT_SQL", "rows": [{"dsi": "Connection_4", "queue": 178000, "agentStatus": null}, {"dsi": "Rep_agent_4", "queue": null, "agentStatus": "Down"}]}, {"name": "PB1_REP5_UAT_SQL", "rows": [{"dsi": "Connection_5", "queue": 4999, "agentStatus": null}, {"dsi": "Rep_agent_5", "queue": null, "agentStatus": "Down"}]}, {"name": "PB1_REP6_UAT_SQL", "rows": [{"dsi": "Rep_agent_6", "queue": null, "agentStatus": "Up"}]}];
 const iq = [{"name": "PB1_IQ_WRITER", "rows": [{"process": "Space", "usage": 98, "transactions": null}, {"process": "Long Running", "usage": null, "transactions": "No"}]}, {"name": "PB1_IQ_READER", "rows": [{"process": "Space", "usage": 65, "transactions": null}, {"process": "Long Running", "usage": null, "transactions": "Yes"}]}];
 
@@ -1253,8 +1398,135 @@ function statusFor(pct){
   if (pct <= 90) return "warning";
   return "critical";
 }
+
+// ---- Sample "Top 10 Tables" data for critical Data Size rows ----
+// NOTE: There is no live database connection here. These table names and
+// record counts are illustrative placeholders generated on the fly so the
+// dropdown has something realistic to show. Swap this out once the real
+// input file (actual top-table extracts) is available.
+const SAMPLE_TABLE_POOL = [
+  "CUSTOMER_MASTER","TRANSACTION_HISTORY","ORDER_DETAILS","ACCOUNT_LEDGER",
+  "PAYMENT_RECORDS","AUDIT_LOG","INVOICE_DATA","PRODUCT_CATALOG",
+  "SHIPMENT_TRACKING","VENDOR_MASTER","EMPLOYEE_RECORDS","SESSION_LOG",
+  "ERROR_LOG","NOTIFICATION_QUEUE","SUBSCRIPTION_DATA","INVENTORY_SNAPSHOT",
+  "PRICING_HISTORY","USER_PROFILE","CONTRACT_DETAILS","CLAIM_RECORDS",
+  "POLICY_MASTER","STAGING_DATA","ARCHIVE_DATA","EVENT_LOG",
+  "BATCH_JOB_HISTORY","RECONCILIATION_DATA","SETTLEMENT_RECORDS",
+  "MESSAGE_QUEUE_LOG","TRANSACTION_STAGING","GL_JOURNAL_ENTRIES"
+];
+function hashSeed(str){
+  let h = 0;
+  for (let i = 0; i < str.length; i++){ h = (h * 31 + str.charCodeAt(i)) >>> 0; }
+  return h;
+}
+function mulberry32(a){
+  return function(){
+    let t = a += 0x6D2B79F5;
+    t = Math.imul(t ^ t >>> 15, t | 1);
+    t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function generateTopTables(seedStr){
+  const rand = mulberry32(hashSeed(seedStr));
+  const pool = SAMPLE_TABLE_POOL.slice();
+  for (let i = pool.length - 1; i > 0; i--){
+    const j = Math.floor(rand() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  const picked = pool.slice(0, 10);
+  let current = 800000 + Math.floor(rand() * 1200000); // top table: 8L - 20L rows
+  const rows = picked.map(name => {
+    const count = Math.max(500, Math.floor(current));
+    current = current * (0.55 + rand() * 0.25); // natural decreasing curve
+    return { name, count };
+  });
+  rows.sort((a, b) => b.count - a.count); // highest record count first, lowest last
+  return rows;
+}
+function escHtml(str){
+  return String(str).replace(/[&<>"']/g, ch => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  }[ch]));
+}
+function escAttr(str){ return escHtml(str).replace(/`/g, "&#96;"); }
+function renderTopTablesDropdown(seedStr){
+  return `<button type="button" class="top-tables-btn" data-ttp-seed="${escAttr(seedStr)}" onclick="toggleTopTablesPopover(this)"><span class="top-tables-label">Top 10</span> &#9662;</button>`;
+}
+
+// ---- Shared floating popover for the Top 10 Tables button ----
+let ttpEl = null;
+let ttpOpenBtn = null;
+function ensureTopTablesPopover(){
+  if (ttpEl) return ttpEl;
+  ttpEl = document.createElement("div");
+  ttpEl.className = "top-tables-popover";
+  document.body.appendChild(ttpEl);
+  return ttpEl;
+}
+function closeTopTablesPopover(){
+  if (ttpEl) ttpEl.classList.remove("open");
+  if (ttpOpenBtn) ttpOpenBtn.classList.remove("active");
+  ttpOpenBtn = null;
+}
+function toggleTopTablesPopover(btn){
+  const popover = ensureTopTablesPopover();
+  if (ttpOpenBtn === btn){ closeTopTablesPopover(); return; }
+
+  const seedStr = btn.getAttribute("data-ttp-seed") || "";
+  const rows = generateTopTables(seedStr);
+  const rowsHtml = rows.map(t => `
+    <div class="ttp-row">
+      <span class="ttp-name">${escHtml(t.name)}</span>
+      <span class="ttp-count">${fmt(t.count)}</span>
+    </div>`).join("");
+  popover.innerHTML = `
+    <div class="ttp-header"><span class="ttp-name">Table Name</span><span class="ttp-count">Record Count</span></div>
+    <div class="ttp-divider"></div>
+    ${rowsHtml}`;
+
+  popover.classList.add("open");
+  if (ttpOpenBtn) ttpOpenBtn.classList.remove("active");
+  ttpOpenBtn = btn;
+  btn.classList.add("active");
+  positionTopTablesPopover(btn);
+}
+function positionTopTablesPopover(btn){
+  if (!ttpEl) return;
+  const r = btn.getBoundingClientRect();
+  const vw = window.innerWidth, vh = window.innerHeight;
+  const popW = Math.max(ttpEl.offsetWidth, 260);
+  const popH = ttpEl.offsetHeight;
+  let left = r.left;
+  if (left + popW > vw - 8) left = Math.max(8, vw - popW - 8);
+  let top = r.bottom + 4;
+  if (top + popH > vh - 8) top = Math.max(8, r.top - popH - 4);
+  ttpEl.style.left = left + "px";
+  ttpEl.style.top = top + "px";
+}
+document.addEventListener("click", (e) => {
+  if (!ttpOpenBtn) return;
+  if (ttpOpenBtn.contains(e.target) || (ttpEl && ttpEl.contains(e.target))) return;
+  closeTopTablesPopover();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeTopTablesPopover();
+});
+window.addEventListener("scroll", () => { if (ttpOpenBtn) positionTopTablesPopover(ttpOpenBtn); }, true);
+window.addEventListener("resize", () => { if (ttpOpenBtn) positionTopTablesPopover(ttpOpenBtn); });
 function fmt(n){ return n.toLocaleString("en-IN"); }
 function pctFmt(p){ return (Math.round(p*100)/100).toFixed(1) + "%"; }
+function trendBadge(delta){
+  // delta is percentage points changed since the previous check, or
+  // null/undefined when there's no prior run to compare against yet.
+  if (delta === null || delta === undefined || Number.isNaN(delta)) return "";
+  if (Math.abs(delta) < 0.1) return "";
+  const up = delta > 0;
+  const sign = up ? "+" : "";
+  const arrow = up ? "&#9650;" : "&#9660;";
+  const cls = up ? "trend-up" : "trend-down";
+  return `<span class="trend-badge ${cls}" title="Change since previous check">${arrow} ${sign}${delta.toFixed(1)}%</span>`;
+}
 function statusIcon(s){
   if (s === "healthy") return '<span class="status-icon">&#10003;</span>';
   if (s === "warning") return '<span class="status-icon">&#9888;</span>';
@@ -1318,9 +1590,12 @@ function renderSummary(server, padCount){
         ${sortedRows.map((r, idx) => `
           <tr data-status="${combinedStatus(r)}" title="Data: ${fmt(r.dbUsed)}/${fmt(r.dbAlloc)} MB used (${pctFmt(r.dbPct)}) &#10; Log: ${fmt(r.logUsed)}/${fmt(r.logAlloc)} MB used (${pctFmt(r.logPct)}) &#10; Checked: ${GENERATED_AT}">
             <td class="summary-slno">${idx + 1}</td>
-            <td class="summary-dbname">${r.name}</td>
-            <td class="summary-pctcell ${r.dbStatus}">${pctFmt(r.dbPct)}</td>
-            <td class="summary-pctcell ${r.logStatus}">${pctFmt(r.logPct)}</td>
+            <td class="summary-dbname${r.dbStatus === "critical" ? " dbname-critical" : ""}">
+              <span class="dbname-text">${r.name}</span>
+              ${r.dbStatus === "critical" ? renderTopTablesDropdown(server.name + "|" + r.name) : ""}
+            </td>
+            <td class="summary-pctcell ${r.dbStatus}">${pctFmt(r.dbPct)}${trendBadge(r.deltaData)}</td>
+            <td class="summary-pctcell ${r.logStatus}">${pctFmt(r.logPct)}${trendBadge(r.deltaLog)}</td>
             <td class="summary-status-col ${combinedStatus(r)}">${statusLabel(combinedStatus(r))}</td>
           </tr>`).join("")}
         ${fillerRows}
@@ -1574,7 +1849,30 @@ function setTheme(mode){
   if (darkBtn) darkBtn.classList.toggle("active", mode === "dark");
 }
 
+// Colors the closed dropdown box itself to match the selected category.
+// (Browsers don't apply an <option>'s own color/background to the closed
+// select display, only inside the open list, so the box otherwise stays
+// stuck on the default teal text for every choice.)
+const FILTER_COLORS = {
+  all: { color:"#1f2937", background:"#ffffff" },
+  critical: { color:"#8B0000", background:"#ffffff" },           // Dark Red
+  warning: { color:"#C2410C", background:"#ffffff" },            // Dark Orange
+  healthy: { color:"#15803d", background:"#ffffff" },            // Dark Green
+  "critical-warning": { color:"#7c2d12", background:"#ffffff" },
+  ase: { color:"#0f766e", background:"#ffffff" },
+  replication: { color:"#713f12", background:"#ffffff" },
+  iq: { color:"#6d28d9", background:"#ffffff" },
+};
+function updateFilterColor(value){
+  const sel = document.getElementById("dashFilter");
+  if (!sel) return;
+  const c = FILTER_COLORS[value] || FILTER_COLORS.all;
+  sel.style.color = c.color;
+  sel.style.background = c.background;
+}
+
 function applyFilter(value){
+  updateFilterColor(value);
   const sectionGroups = {
     ase: [document.getElementById("section-ase"), document.getElementById("summary-grid")],
     replication: [document.getElementById("section-replication"), document.getElementById("replication-summary")],
@@ -1601,26 +1899,32 @@ function applyFilter(value){
     tr.classList.toggle("row-hidden", hide);
   });
 
-  // Per card: show the table normally if any row matches; if nothing matches AND
-  // the card is genuinely all-healthy, show the friendly note instead of an empty
-  // table; otherwise (nothing matches for an unrelated reason) collapse the card.
+  // Filler rows only exist to keep cards in the same visual row equal height
+  // when every row is shown. Once a status filter trims rows unevenly, those
+  // fillers just add blank space below the real data, so hide them whenever
+  // a specific status filter is active.
+  document.querySelectorAll("tr.filler-row").forEach(tr => {
+    tr.style.display = (statuses !== null) ? "none" : "";
+  });
+
+  // Per card: show the table normally if any row matches the active filter.
+  // A card with nothing matching (e.g. an all-healthy replication server
+  // while viewing "Critical & Warning" or "Only Critical") simply disappears
+  // rather than showing an unrelated "all healthy" note — the note only made
+  // sense for a view with no status filtering at all, which no longer applies
+  // to any of the dropdown options here.
   document.querySelectorAll(".summary-card, .replication-card, .iq-card").forEach(card => {
     const rows = card.querySelectorAll("tr[data-status]");
     const table = card.querySelector("table");
     const note = card.querySelector(".all-healthy-note");
     if (rows.length === 0) { card.classList.remove("card-hidden"); return; }
 
-    const allHealthy = Array.from(rows).every(tr => tr.dataset.status === "healthy");
     const anyVisible = Array.from(rows).some(tr => !tr.classList.contains("row-hidden"));
 
     if (anyVisible){
       card.classList.remove("card-hidden");
       if (table) table.style.display = "";
       if (note) note.style.display = "none";
-    } else if (allHealthy){
-      card.classList.remove("card-hidden");
-      if (table) table.style.display = "none";
-      if (note) note.style.display = "";
     } else {
       card.classList.add("card-hidden");
     }
@@ -1637,8 +1941,6 @@ function applyFilter(value){
 }
 applyFilter(document.getElementById("dashFilter") ? document.getElementById("dashFilter").value : "critical-warning");
 </script>
-
-
 
 </body>
 </html>
