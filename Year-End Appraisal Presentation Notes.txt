@@ -1,0 +1,47 @@
+Year-End Appraisal: Presentation Notes
+Summary
+This year I handled developer requests and daily database operations, built a self-initiated database dashboard, set up a Git vs. Qualification stored procedure comparison, led the stored procedure reunification project across two databases, and investigated a slowness issue in the Subnet application.
+1.  Developer requests: Completed 9 developer tickets (11 items including database-specific variants), covering DDL-related changes.
+2.  BAU operations: Handled day-to-day database administration and support, keeping databases stable and available.
+3.  Database Dashboard (self-initiated): Built a dashboard showing each database's name and usage, plus a table of the top 10 records.
+4.  Stored procedure differences, Git vs. Qualification (PROD copy): Set up a process to find where stored procedures differ between Git and Qualification.
+5.  Stored procedure reunification project: Cash module (CSH): about 65 of 105 procedures done, on hold pending developer input. Confirmations module (CAR): all 116 done, with commit and rollback scripts ready and UAT deployment in progress.
+6.  Subnet application slowness: Found full table scans using SQL Optimizer and Show Plan, proved in UAT that indexes fix it, and recommended forcing the index. The front-end tool could not apply it, so the team went for archival.
+    ◦ If asked why archival was chosen over the index: the index fix was proven in UAT but blocked by the tool's limits (hard-coded statements only), so archival was the practical alternative.
+Detailed tasks taken
+1. Developer requests
+• Handled the tickets raised by the developers, including AER_CLC-15132, 19638, 19959, 19659, 19467, 20121 and 13526.
+• Some tickets had separate items for specific databases (PblinkHist, CUSTARC, LIS), which I handled individually: AER_CLC-20971_PblinkHist, 19659_PblinkHist, 12942_CUSTARC and 12942_LIS.
+• In total this came to 9 tickets and 11 items, mostly DDL-related changes.
+• Completing these on time kept developer work moving without waiting on the database side.
+2. BAU operations
+• Ran routine database administration and support throughout the year, alongside the project work.
+• Kept the databases stable and available for the application teams.
+• Supported day-to-day requests from the teams as they came in.
+3. Database Dashboard (self-initiated)
+• Started this on my own initiative to get a quick view of the database environment.
+• The dashboard shows each database's name and its usage.
+• It also includes a table of the top 10 records.
+• The team can now check utilization at a glance instead of running manual queries, and spot heavy usage early.
+4. Stored procedure differences: Git vs. Qualification (PROD copy)
+• Set up a process to compare stored procedures in Git against the Qualification environment, which is a copy of Production.
+• The comparison shows exactly which procedures differ between the two.
+• This catches code drift and mismatches before they cause problems in Production.
+• It also helps when investigating slow procedures, since the differences are easy to see.
+5. Stored procedure reunification project
+• The goal is to reunify stored procedures across two databases so they are consistent.
+• Cash module (CSH database):
+    ◦ Total of 105 stored procedures, of which about 65 are completed.
+    ◦ The project is currently on hold pending input from the developers.
+• Confirmations module (CAR database):
+    ◦ All 116 stored procedures are completed.
+    ◦ Commit and rollback scripts have been prepared.
+    ◦ UAT deployment is in progress.
+• The rollback scripts reduce risk when the changes are deployed.
+6. Subnet application: slow record retrieval
+• Problem: The Subnet application was slow to retrieve records in its front end.
+• Diagnosis: Using SQL Optimizer and Show Plan, I found that some tables were going for full table scans.
+• Testing: I created indexes in the UAT database. Records then came back within a few seconds.
+• Recommendation: The optimizer was still not using the index even after update statistics, so I asked the Subnet team to force the index in their queries.
+• Outcome: Their front-end tool only allows a fixed set of hard-coded statements, so the recommendation could not be applied. The team went ahead with archival instead.
+• Likely question: Why archival instead of the index? The index fix was proven in UAT, but the tool's limits blocked it, so archival was the practical alternative.
